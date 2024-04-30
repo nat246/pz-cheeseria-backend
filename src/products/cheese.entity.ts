@@ -18,6 +18,6 @@ export class Cheese {
   @Column()
   price: number;
 
-  @Column()
+  @Column({ type: 'text' })
   color: CheeseColor;
 }
