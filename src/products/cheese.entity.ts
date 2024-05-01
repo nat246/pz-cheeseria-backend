@@ -1,9 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn, Unique } from 'typeorm';
 import { CheeseColor } from './cheese-color.enum';
 
 @Entity()
+@Unique(['id'])
+@Unique(['name'])
 export class Cheese {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
 
   @Column()
