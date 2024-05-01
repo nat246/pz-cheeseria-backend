@@ -3,6 +3,7 @@ import { CheesesRepository } from './cheeses.repository';
 import { CreateCheeseDto } from './dto/create-cheese.dto';
 import { Cheese } from './cheese.entity';
 import { UpdateCheeseDto } from './dto/update-cheese.dto';
+import { GetCheesesFilterDto } from './dto/get-cheese-filter.dto';
 
 @Injectable()
 export class ProductsService {
@@ -24,6 +25,12 @@ export class ProductsService {
     }
 
     return found;
+  }
+
+  async getCheesesBySearch(
+    cheesesFilterDto: GetCheesesFilterDto,
+  ): Promise<Cheese[]> {
+    return await this.cheesesRepository.getCheesesBySearch(cheesesFilterDto);
   }
 
   async updateCheeseDetails(

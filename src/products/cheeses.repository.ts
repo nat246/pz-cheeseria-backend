@@ -6,6 +6,7 @@ import {
 import { DataSource, Repository } from 'typeorm';
 import { Cheese } from './cheese.entity';
 import { CreateCheeseDto } from './dto/create-cheese.dto';
+import { GetCheesesFilterDto } from './dto/get-cheese-filter.dto';
 
 @Injectable()
 export class CheesesRepository extends Repository<Cheese> {
@@ -45,10 +46,32 @@ export class CheesesRepository extends Repository<Cheese> {
       }
     }
   }
+
+  async getCheesesBySearch(
+    cheesesFilterDto: GetCheesesFilterDto,
+  ): Promise<Cheese[]> {
+    const { search, color } = cheesesFilterDto;
+
+    const query = this.createQueryBuilder('cheese');
+
+    if (color) {
+      query.andWhere('cheese.color = :color', { color });
+    }
+
+    if (search) {
+      query.andWhere(
+        'LOWER(cheese.name) LIKE LOWER(:search) OR LOWER(cheese.description) LIKE LOWER(:search)',
+        { search: `%${search}%` },
+      );
+    }
+
+    const cheeses = await query.getMany();
+    return cheeses;
+  }
 }
 
 const kebabCase = (str) =>
   str
-    .replace(/([a-z])([A-Z])/g, '$1-$2') // Capitalize the next letter after a lowercase letter
-    .replace(/[\s_]+/g, '-') // Replace spaces and underscores with hyphens
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/[\s_]+/g, '-')
     .toLowerCase();

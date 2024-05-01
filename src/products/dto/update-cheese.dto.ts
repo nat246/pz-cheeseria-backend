@@ -1,19 +1,27 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsOptional, IsPositive, IsUrl } from 'class-validator';
+import {
+  IsNumber,
+  IsOptional,
+  IsPositive,
+  IsString,
+  IsUrl,
+} from 'class-validator';
 
 export class UpdateCheeseDto {
   @ApiProperty()
   @IsOptional()
-  description: string;
+  @IsString()
+  description?: string;
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   @IsUrl()
-  image: string;
+  image?: string;
 
   @ApiProperty()
   @IsOptional()
   @IsNumber()
   @IsPositive()
-  price: number;
+  price?: number;
 }
