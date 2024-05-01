@@ -4,7 +4,7 @@ import { Cheese } from './cheese.entity';
 import { CreateCheeseDto } from './dto/create-cheese.dto';
 
 @Injectable()
-export class CheeseRepository extends Repository<Cheese> {
+export class CheesesRepository extends Repository<Cheese> {
   constructor(private dataSource: DataSource) {
     super(Cheese, dataSource.createEntityManager());
   }
