@@ -1,3 +1,7 @@
+# Comments
+Due to time constraints and unfamiliarity of the framework I would've added more unit tests in both product.service and product.controller.
+I also think that the error handling could be a lot better.
+___
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
