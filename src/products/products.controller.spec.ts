@@ -3,7 +3,6 @@ import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
 import { CheesesRepository } from './cheeses.repository';
 import { CheeseColor } from './cheese-color.enum';
-import { Cheese } from './cheese.entity';
 
 const mockCheesesRepository = () => ({
   createCheese: jest.fn(),
