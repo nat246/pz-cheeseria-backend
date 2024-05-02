@@ -41,7 +41,7 @@ export class CheesesRepository extends Repository<Cheese> {
       if (error.code === '23505') {
         throw new ConflictException('Cheese already exists');
       } else {
-        throw new InternalServerErrorException();
+        throw new InternalServerErrorException(error);
       }
     }
   }
@@ -64,8 +64,13 @@ export class CheesesRepository extends Repository<Cheese> {
       );
     }
 
-    const cheeses = await query.getMany();
-    return cheeses;
+    try {
+      const cheeses = await query.getMany();
+      return cheeses;
+    } catch (error) {
+      console.log(error);
+      throw new InternalServerErrorException(error);
+    }
   }
 }
 

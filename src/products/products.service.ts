@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CheesesRepository } from './cheeses.repository';
 import { CreateCheeseDto } from './dto/create-cheese.dto';
 import { Cheese } from './cheese.entity';
@@ -52,9 +56,13 @@ export class ProductsService {
       cheese.price = price;
     }
 
-    await this.cheesesRepository.save(cheese);
-
-    return cheese;
+    try {
+      await this.cheesesRepository.save(cheese);
+      return cheese;
+    } catch (error) {
+      console.log(error);
+      throw new InternalServerErrorException(error);
+    }
   }
 
   async deleteCheese(id: string): Promise<void> {
