@@ -37,7 +37,6 @@ export class CheesesRepository extends Repository<Cheese> {
 
     try {
       await this.save(cheese);
-      console.log('success');
     } catch (error) {
       if (error.code === '23505') {
         throw new ConflictException('Cheese already exists');

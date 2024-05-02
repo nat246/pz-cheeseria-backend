@@ -11,13 +11,13 @@ export class Cheese {
   @Column()
   name: string;
 
-  @Column()
+  @Column('text')
   description: string;
 
   @Column()
   image: string;
 
-  @Column()
+  @Column('real', { scale: 2 })
   price: number;
 
   @Column({ type: 'text' })
