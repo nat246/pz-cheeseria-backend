@@ -6,8 +6,12 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors();
+
+  // For validation using @ decorators from class-validators
   app.useGlobalPipes(new ValidationPipe());
 
+  // Swagger Config
   const config = new DocumentBuilder()
     .setTitle('PZ Cheeseria API')
     .setDescription('The PZ Cheeseria API')
